@@ -65,15 +65,12 @@ class RSSFormatter < Formatter
   end
 end
 
-parsed = parse(open("http://crawler.sbcr.jp/samplepage.html", "r:UTF-8", &:read))
-
-formatter = case ARGV.first
-            when "rss-output"
-              :format_rss
-            when "text-output"
-              :format_text
-            end
-
-puts __send__(formatter,"WWW.SBCR.JP トピックス","http://crawler.sbcr.jp/samplepage.html", parsed)
-
-
+site = SbcrTopics.new(
+  url:"http://crawler.sbcr.jp/samplepage.html",
+  title:"WWW.SBVR.JP トピックス")
+case ARGV.first
+when "rss-output"
+  puts site.output RSSFormatter
+when "text-output"
+  puts site.output TextFormatter
+end
