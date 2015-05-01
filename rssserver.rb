@@ -4,6 +4,7 @@ require 'cgi'
 require 'open-uri'
 require 'rss'
 
+
 def parse(page_source)          # →SbcrTopics
   dates = page_source.scan(%r!(\d+)年 ?(\d+)月 ?(\d+)日<br />!)
   url_titles = page_source.scan(%r!^<a href="(.+?)">(.+?)</a><br />!)  
